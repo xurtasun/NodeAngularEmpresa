@@ -1,0 +1,68 @@
+<!doctype html>
+
+<html ng-app="MainApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ejemplo MEAN</title>
+    <!-- Cargamos bootstrap -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css">
+    <!-- Cargamos angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <!-- Cargamos el javascript de angular -->
+    <script src="/js/main.js"></script>
+
+</head>
+<body ng-controller="mainController">
+<div class="container">
+
+    <div class="jumbotron text-center" ng-prueba>
+        <h1 class=" pacifico">Nº de Registros: <span class="label label-success">{{ empresas.length }}</span></h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-1">
+            <table class="table table-striped">
+                <tr class="info">
+                    <td>Nombre</td>
+                    <td>Username</td>
+                    <td>Descripción</td>
+                    <td>Email</td>
+                    <td>Password</td>
+                </tr>
+                <tr ng-repeat="empresa in empresas" ng-click="selectCompany(empresa)">
+                    <td>{{ empresa.nombre }}</td>
+                    <td>{{ empresa.username }}</td>
+                    <td>{{ empresa.descripcion }}</td>
+                    <td>{{ empresa.email }}</td>
+                    <td>{{ empresa.password }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-4 col-sm-offset-1 text-center">
+            <form name="myForm">
+                <div class="form-group">
+                    <input type="text" class="form-control input-lg text-center" placeholder="Nombre Empresa" ng-model="newEmpresa.nombre" required>
+                    <br>
+                    <input type="text" class="form-control input-lg text-center" placeholder="Username" ng-model="newEmpresa.username" required>
+                    <br>
+                    <input type="text" class="form-control input-lg text-center" placeholder="Descripción" ng-model="newEmpresa.descripcion" required>
+                    <br>
+                    <input type="email" class="form-control input-lg text-center" placeholder="Email" ng-model="newEmpresa.email" required>
+                    <br>
+                    <input type="password" class="form-control input-lg text-center" placeholder="Password" ng-model="newEmpresa.password" required>
+                </div>
+
+                <!-- Acciones que podemos realizar en el formulario -->
+                <button type="submit" class="btn btn-success btn-lg" ng-click="registrarEmpresa()" ng-disabled="myForm.$invalid || selected">Registrar</button>
+                <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarEmpresa(newEmpresa)" ng-disabled="!newEmpresa.nombre || !newEmpresa.username || !newEmpresa.descripcion || !newEmpresa.email || !newEmpresa.password || !selected">Modificar</button>
+                <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarEmpresa(newEmpresa)" ng-disabled="!newEmpresa.nombre || !newEmpresa.username || !newEmpresa.descripcion || !newEmpresa.email || !newEmpresa.password || !selected">Borrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
